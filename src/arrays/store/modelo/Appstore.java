@@ -1,5 +1,7 @@
 package arrays.store.modelo;
 
+import javax.print.attribute.standard.PageRanges;
+
 public class Appstore {
     private static final int MAX = 4;
     private Juego juegos[];
@@ -64,5 +66,32 @@ public class Appstore {
 
         }
         return 0;
+    }
+
+    public void inicializarData(){
+        agregarJuego(new Juego("LOL","ACCION", 20, 45,60));
+        agregarJuego(new Juego("FIFA26","Deportes",10,67,50));
+    }
+
+
+    public String Mostselled(){
+        String name = "";
+        int mayor;
+        if (indice>=0){
+            name = juegos[0].getName();
+            mayor = juegos[0].getSoldLicenses();
+            for (Juego j: juegos){
+                if (j != null) {
+                    if (j.getSoldLicenses()> mayor){
+                        mayor = j.getSoldLicenses();
+                        name= j.getName();
+                    }
+                }
+                else {
+                    return name;
+                }
+            }
+        }
+        return name;
     }
 }
