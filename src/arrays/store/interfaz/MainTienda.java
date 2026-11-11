@@ -2,6 +2,7 @@ package arrays.store.interfaz;
 
 import arrays.store.modelo.Appstore;
 import arrays.store.modelo.Juego;
+import arrays.store.modelo.Validaciones;
 
 import javax.swing.*;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class MainTienda {
     private static Scanner sc= new Scanner(System.in);
     private static Appstore tienda = new Appstore();
+    private static Validaciones valid = new Validaciones();
 
     static void main(String[] args) {
         int opt = 0;
@@ -55,14 +57,11 @@ public class MainTienda {
 
     public static void IngresarJuego(){
         System.out.println("*******Ingreso de datos********");
-        String nombre = ValidarTexto("Ingresa el nombre, no puede ser nulo ni blanco");
-        String categoria = ValidarTexto("Ingresa la categoria, no puede ser nulo ni blanco");
-        System.out.print("Ingrese el tamanio: ");
-        int tamanio = Integer.parseInt(sc.nextLine());
-        System.out.print("Ingrese el precio: ");
-        double precio = Double.parseDouble(sc.nextLine());
-        System.out.print("Ingrese el stock inicial: ");
-        int licenciasDisponibles = Integer.parseInt(sc.nextLine());
+        String nombre = valid.ValidarText("Ingresa el nombre, no puede ser nulo ni blanco");
+        String categoria = valid.ValidarText("Ingresa la categoria, no puede ser nulo ni blanco");
+        int tamanio = valid.ValidarEnteroYnonegativo("Ingrese el tamano");
+        double precio = valid.ValidarDoubleNoNegativo("Ingresa el precio: ");
+        int licenciasDisponibles = valid.ValidarEnteroYnonegativo("Ingrese las licencias disponibles: ");
         if (tienda.agregarJuego(new Juego(nombre,categoria,tamanio,precio,licenciasDisponibles))){
             JOptionPane.showMessageDialog(null, "Juego INgresado con exito");
 
@@ -101,25 +100,7 @@ public class MainTienda {
 
     }
 
-    public static String ValidarTexto(String message){
 
-        String word;
-        do {
-            System.out.println(message);
-            word = sc.nextLine();
-        }while (word == null || word.trim().isEmpty());
-        return word;
-
-    }
-
-    public static int ValidarInt(String message){
-
-        int number;
-        do {
-            System.out.println(message);
-            number = sc.nextInt();
-        }while (number || number.)
-    }
     }
 
 
