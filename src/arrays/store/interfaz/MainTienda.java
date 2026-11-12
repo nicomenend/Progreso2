@@ -14,6 +14,7 @@ public class MainTienda {
 
     static void main(String[] args) {
         int opt = 0;
+        tienda.inicializarData();
         do {
             menu();
             opt = Integer.parseInt(sc.nextLine());
@@ -28,13 +29,13 @@ public class MainTienda {
                     search();
                 }break;
                 case 4:{
-
+                    comprar();
                 }break;
                 case 5:{
-
+                    vender();
                 }break;
                 case 6:{
-
+                    juegoMasVendido();
                 }break;
 
 
@@ -99,8 +100,41 @@ public class MainTienda {
         }
 
     }
+    public static void comprar(){
+        System.out.println("Que juego deseas comprar?");
+        String nombre = sc.nextLine();
 
+        int cantidad = valid.ValidarEnteroYnonegativo("Ingrese la cantidad que desea comprar: ");
 
+        if (tienda.comprar(nombre, cantidad)){
+            JOptionPane.showMessageDialog(null, "Compra realizada con exito");
+        }else{
+            JOptionPane.showMessageDialog(null, "No fue posible realizar la compra");
+        }
     }
 
+    public static void vender(){
+        System.out.println("Que juego deseas vender?");
+        String nombre = sc.nextLine();
 
+        int cantidad = valid.ValidarEnteroYnonegativo("Ingrese la cantidad que desea vender: ");
+
+        if (tienda.vender(nombre, cantidad) > 0){
+            JOptionPane.showMessageDialog(null, "Venta realizada con exito");
+        }else{
+            JOptionPane.showMessageDialog(null, "No fue posible realizar la venta");
+        }
+    }
+
+    public static void juegoMasVendido(){
+        String juego = tienda.Mostselled();
+
+        if (juego != null){
+            System.out.println("*******Juego mas vendido*******");
+            System.out.println(juego);
+        }else{
+            System.out.println("No hay juegos vendidos");
+        }
+    }
+
+    }
